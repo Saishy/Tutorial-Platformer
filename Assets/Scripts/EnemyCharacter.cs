@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class Enemy : Character {
+public class EnemyCharacter : Character {
 
 	[Header("AI")]
 	public float seeDistance;
@@ -21,9 +21,9 @@ public class Enemy : Character {
 		base.ReceiveInput(input);
 
 		if (input.x > 0) {
-			FlipDirection(true);
+			ChangeLookDirection(true);
 		} else if (input.x < 0) {
-			FlipDirection(false);
+			ChangeLookDirection(false);
 		}
 	}
 
@@ -37,16 +37,8 @@ public class Enemy : Character {
 		return false;
 	}
 
-	void FlipDirection(bool isGoingRight) {
-		if (isGoingRight) {
-			_spriteRenderer.flipX = true;
-		} else {
-			_spriteRenderer.flipX = false;
-		}
-	}
-
 	public Character AcquireTarget() {
-		int hits = Physics2D.OverlapBoxNonAlloc(_movementComponent.CenterCollider, new Vector2(seeDistance, _movementComponent.SizeCollider.y), 0f, cacheTargets, 1 << 8 | 1 << 10);
+		int hits = Physics2D.OverlapBoxNonAlloc(_movementComponent.CenterCollider, new Vector2(seeDistance*2, _movementComponent.SizeCollider.y), 0f, cacheTargets, 1 << 8 | 1 << 10);
 
 		for (int i = 0; i < hits; i++) {
 			Character hitCharacter = cacheTargets[i].gameObject.GetComponent<Character>();
@@ -55,5 +47,9 @@ public class Enemy : Character {
 			}
 		}
 		return null;
+	}
+
+	protected override void Death() {
+		Destroy(gameObject);
 	}
 }

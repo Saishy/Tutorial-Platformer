@@ -5,7 +5,7 @@
 [RequireComponent(typeof(AttackManager))]
 [RequireComponent(typeof(SpriteRenderer))]
 
-public abstract class Character : MonoBehaviour {
+public abstract class Character : MonoBehaviour, ITargetable {
 
 	protected SpriteRenderer _spriteRenderer;
 	protected MovementComponent _movementComponent;
@@ -22,11 +22,15 @@ public abstract class Character : MonoBehaviour {
 	[SerializeField]
 	protected float jumpSpeed;
 
+	public Controller Controller { get { return _controller; } }
+
 	public AttackManager AttackManager {
 		get {
 			return _attackManager;
 		}
 	}
+
+	public HealthComponent HealthComponent { get; protected set; }
 
 	public int TeamID {
 		get {
@@ -36,6 +40,10 @@ public abstract class Character : MonoBehaviour {
 
 			return _controller.teamID;
 		}
+	}
+
+	public bool IsLookingRight() {
+		return _movementComponent.BLookingRight;
 	}
 
 	void Awake() {
@@ -48,6 +56,7 @@ public abstract class Character : MonoBehaviour {
 		_movementComponent = GetComponent<MovementComponent>();
 		_attackManager = GetComponent<AttackManager>();
 		_animator = GetComponent<Animator>();
+		HealthComponent = GetComponent<HealthComponent>();
 	}
 
 	private void Start() {
@@ -59,6 +68,8 @@ public abstract class Character : MonoBehaviour {
 		_movementComponent.JumpSpeed = jumpSpeed;
 
 		_attackManager.Initialize(this);
+
+		HealthComponent.OnDeath += Death;
 	}
 
 	private void Update() {
@@ -116,6 +127,20 @@ public abstract class Character : MonoBehaviour {
 		_attackManager.Fire(attackIndex);
 	}
 
+	public virtual void ChangeLookDirection(bool lookRight) {
+		_movementComponent.BLookingRight = lookRight;
+		_spriteRenderer.flipX = lookRight;
+	}
 
+	public virtual bool CanBeTargetOf(Character character) {
+		return TeamID != character.TeamID;
+	}
 
+	public virtual void TakeDamage(float damage, Character character) {
+		HealthComponent.TakeDamage(damage);
+	}
+
+	protected virtual void Death() {
+
+	}
 }

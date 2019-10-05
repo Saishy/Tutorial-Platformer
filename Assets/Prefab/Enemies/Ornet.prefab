@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 2670150811715673106}
   - component: {fileID: 6373878684057628283}
   - component: {fileID: 2009543918}
+  - component: {fileID: 6870605860102336687}
+  - component: {fileID: 1788004621}
   m_Layer: 10
   m_Name: Ornet
   m_TagString: Untagged
@@ -140,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  teamID: 1
 --- !u!114 &6373878684057628276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   jumpSpeed: 0
+  seeDistance: 10
 --- !u!114 &2670150811715673106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,5 +208,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87b37329dc60e54d8e1f60eb7503872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacks: []
+  attacks:
+  - {fileID: 1788004621}
   owner: {fileID: 0}
+--- !u!114 &6870605860102336687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373878684057628282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ecf3bf33c1cae041991c7f820f1a50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 30
+--- !u!114 &1788004621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373878684057628282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c052441ef477bd146a57d18bf01707bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackManager: {fileID: 0}
+  cooldown: 2
+  duration: 0.5
+  bCooldownOnFinish: 0
+  range: 10
+  _col2D: {fileID: 0}
+  damage: 30
+  prefabSpike: {fileID: 6767589305186832747, guid: cbeb6992b7470ed4083b19d50b98b944,
+    type: 3}

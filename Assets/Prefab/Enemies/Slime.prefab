@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63f039418b3cd849880664cbe2dfa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 0
-  duration: 0
+  attackManager: {fileID: 0}
+  cooldown: 3
+  duration: 0.55
   bCooldownOnFinish: 0
+  range: 2
+  _col2D: {fileID: 968133002}
+  damage: 15
 --- !u!61 &968133002
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -90,6 +94,7 @@ GameObject:
   - component: {fileID: 8772684946605151369}
   - component: {fileID: -1097714371077559084}
   - component: {fileID: 815582919}
+  - component: {fileID: -6944500948912353414}
   m_Layer: 10
   m_Name: Slime
   m_TagString: Untagged
@@ -192,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
+  teamID: 1
 --- !u!114 &8772684946605151371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   jumpSpeed: 0
+  seeDistance: 2
 --- !u!50 &8772684946605151368
 Rigidbody2D:
   serializedVersion: 4
@@ -277,5 +284,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d87b37329dc60e54d8e1f60eb7503872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacks: []
+  attacks:
+  - {fileID: 968133003}
   owner: {fileID: 0}
+--- !u!114 &-6944500948912353414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8772684946605151374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ecf3bf33c1cae041991c7f820f1a50e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHealth: 10

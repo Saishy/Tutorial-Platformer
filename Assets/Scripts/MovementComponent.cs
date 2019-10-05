@@ -8,6 +8,7 @@ public class MovementComponent : MonoBehaviour
 	public float JumpSpeed { get; set; }
 	public Vector2 MovementInput { get; set; }
 	public bool JumpInput { get; set; }
+	public bool BLookingRight { get; set; }
 
 	private float _currentGravity;
 	private bool _previousFrameGrounded;

@@ -14,7 +14,11 @@ public abstract class Controller : MonoBehaviour {
 		character = GetComponent<Character>();
 	}
 
-	void Start() {
+	public void Start() {
+		StartInit();
+	}
+
+	protected virtual void StartInit() {
 		character.Possessed(this);
 	}
 
@@ -24,7 +28,6 @@ public abstract class Controller : MonoBehaviour {
 		if (character != null) {
 			character.ReceiveInput(movementInput);
 			character.Jump(GetJump());
-
 		}
 	}
 

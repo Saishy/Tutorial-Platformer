@@ -45,4 +45,13 @@ public class AttackManager : MonoBehaviour {
 		return -1;
 	}
 
+	public bool IsAttacking() {
+		foreach (Attack atk in attacks) {
+			if (atk.IsUsing()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

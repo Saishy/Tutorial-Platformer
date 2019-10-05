@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character {
+public class PlayerCharacter : Character {
 
 	ParticleSystem _particleSystem;
 
@@ -32,9 +32,9 @@ public class Player : Character {
 
 		if (_movementComponent.CurrentVelocity.x != 0) {
 			if (_movementComponent.CurrentVelocity.x < 0) {
-				_spriteRenderer.flipX = true;
+				ChangeLookDirection(true);
 			} else {
-				_spriteRenderer.flipX = false;
+				ChangeLookDirection(false);
 			}
 		}
 	}
@@ -49,4 +49,7 @@ public class Player : Character {
 
 	}
 
+	protected override void Death() {
+		Destroy(gameObject);
+	}
 }

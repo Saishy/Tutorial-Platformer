@@ -16,12 +16,14 @@ public class Attack : MonoBehaviour {
 	[Header("AI")]
 	public float range;
 
-	private float _lastTimeUsed;
+	private float _nextUseTime;
 	protected bool bUsing;
 
 	public Collider2D _col2D;
 
 	private float usingTimer;
+
+	public float damage;
 
 	public void Initialize(AttackManager attackManager) {
 		this.attackManager = attackManager;
@@ -43,15 +45,19 @@ public class Attack : MonoBehaviour {
 	/// <summary>Checks if out of cooldown.</summary>
 	/// <returns></returns>
 	public virtual bool CheckIfOutOfCooldown() {
-		return (Time.timeSinceLevelLoad - _lastTimeUsed) >= cooldown;
+		return (Time.timeSinceLevelLoad) >= _nextUseTime;
 	}
 
 	public virtual bool CheckIfCanUse() {
 		return !bUsing && CheckIfOutOfCooldown();
 	}
 
+	public virtual bool IsUsing() {
+		return bUsing;
+	}
+
 	void StartCooldown() {
-		_lastTimeUsed = Time.timeSinceLevelLoad;
+		_nextUseTime = Time.timeSinceLevelLoad + cooldown;
 	}
 
 	public virtual void Fire() {
@@ -77,4 +83,6 @@ public class Attack : MonoBehaviour {
 	protected virtual bool ReturnFalse() {
 		return false;
 	}
+
+
 }

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime_BasicAttack : Attack {
-
+public class Snake_BasicAttack : Attack
+{
 	protected static Collider2D[] colResults = new Collider2D[50];
 
 	protected override void FireStart() {
 		base.FireStart();
-		
+
 		attackManager.owner.SetAnimationTrigger("Attack");
 
 		attackManager.owner.CanMove += ReturnFalse;
@@ -34,4 +34,5 @@ public class Slime_BasicAttack : Attack {
 			}
 		}
 	}
+
 }
